@@ -10,6 +10,20 @@
     <div id="app"></div>
 
     <canvas id="bg"></canvas>
+
+  <div id="controls">
+    <h3>PHYSICS CONTROLS</h3>
+    <label>G (gravity constant) <span id="G-val">5</span>
+      <input type="range" id="G-slider" min="0.1" max="20" step="0.1" value="5">
+    </label>
+    <label>M (black hole mass) <span id="M-val">2000</span>
+      <input type="range" id="M-slider" min="100" max="10000" step="100" value="2000">
+    </label>
+    <label>Time step <span id="ts-val">0.02</span>
+      <input type="range" id="ts-slider" min="0.001" max="0.1" step="0.001" value="0.02">
+    </label>
+  </div>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -16,3 +16,31 @@ body {
   background-size: cover;
   height: 100vh;
 }
+
+#controls {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: monospace;
+  font-size: 13px;
+  min-width: 260px;
+}
+
+#controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#controls input[type="range"] {
+  width: 100%;
+  accent-color: orange;
+}

@@ -26,7 +26,7 @@ camera.position.setZ(30);
 renderer.render(scene, camera);
 
 const blackHoleGeometry = new THREE.SphereGeometry(4, 32, 32);
-const blackHoleMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 });
+const blackHoleMaterial = new THREE.MeshStandardMaterial({ color: 0xffa500, wireframe: true });
 const blackHole = new THREE.Mesh(blackHoleGeometry, blackHoleMaterial);
 blackHole.position.set(0, 0, 0);
 scene.add(blackHole);
@@ -89,3 +89,30 @@ function animate() {
 
 animate();
 
+const sliders = [
+  { id: "G-slider",  valId: "G-val",  key: "G",        decimals: 1 },
+  { id: "M-slider",  valId: "M-val",  key: "M",        decimals: 0 },
+  { id: "ts-slider", valId: "ts-val", key: "timeStep",  decimals: 3 },
+];
+
+sliders.forEach(({ id, valId, key, decimals }) => {
+  const slider = document.getElementById(id);
+  const display = document.getElementById(valId);
+
+  slider.addEventListener("input", () => {
+    const val = parseFloat(slider.value);
+    physics[key] = val;
+    display.textContent = val.toFixed(decimals);
+
+    if (key === "G" || key === "M") {
+      stars.forEach((star) => {
+        const radius = star.mesh.position.length();
+        const speed = Math.sqrt((physics.G * physics.M) / Math.max(radius, 1));
+        const { x, y } = star.mesh.position;
+        star.velocity = new THREE.Vector3(-y, x, 0)
+          .normalize()
+          .multiplyScalar(speed * 0.4);
+      });
+    }
+  });
+});
